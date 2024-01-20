@@ -1,4 +1,8 @@
 type Query{
      #scaler
-     firstQuery:String   
+     firstQuery:String
+     
+     # gql with argument
+     secondQuery(firstName:String,lastName:String): String
+        
 }
