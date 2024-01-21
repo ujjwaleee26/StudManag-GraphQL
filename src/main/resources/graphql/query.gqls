@@ -6,7 +6,7 @@ type Query{
      secondQuery(firstName:String,lastName:String): String
      
      # get all student record
-     getAllStudent:[StudentResponse]
+     getAllStudents:[StudentResponse]
         
 }
 

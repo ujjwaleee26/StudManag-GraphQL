@@ -25,7 +25,7 @@ public class Subject
    @JoinColumn(name="teacher_id",referencedColumnName = "id")
    private Member teacher;
    
-   @Column(name="exprience")
+   @Column(name="experience")
    private int experience;
    
 }
