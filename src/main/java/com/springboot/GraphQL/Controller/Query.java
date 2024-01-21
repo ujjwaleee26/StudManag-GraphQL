@@ -1,9 +1,11 @@
 package com.springboot.GraphQL.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
@@ -39,10 +41,34 @@ public class Query
    }
    
    //implement graphQL resolver or data fetcher 
-   @SchemaMapping(typeName = "StudentResponse",field="result")
-   public List<StudentSubjectResponse> getResultsForStudents(StudentResponse student){
-	   System.out.println(": : in graphQL resolver : :");
-	   return  resultService.getResultForStudent(student.getId());
+   //over fetching resolved
+//   @SchemaMapping(typeName = "StudentResponse",field="result")
+//   public List<StudentSubjectResponse> getResultsForStudents(StudentResponse student){
+//	   System.out.println(": : in graphQL resolver : :");
+//	   return  resultService.getResultForStudent(student.getId());
+//   }
+//	   
+//   problem is that , we are making n+1 calls, and we need to resolve it
+//	   :: in MemberService, fetching all students ::
+//		   : : in graphQL resolver : :
+//		   :: in ResultService, fetching result for student : 1
+//		   : : in graphQL resolver : :
+//		   :: in ResultService, fetching result for student : 2
+//		   : : in graphQL resolver : :
+//		   :: in ResultService, fetching result for student : 3
+	   
+   
+   //graphQL dataloader
+//   batch mapping increases flexbility with calls, with max=1 , its like schema mapping 
+    @BatchMapping(typeName = "StudentResponse", field = "result",maxBatchSize = 2)
+    public Map<StudentResponse, List<StudentSubjectResponse>> getResultForAllStudents(List<StudentResponse> students){
+    	
+    	System.out.println(":: fetching results for all students");
+		// single database call to fetch entire results for all students
+		return resultService.getResultsForStudents(students);
+    }
+
+   	   
 	   
    }
-}
+
