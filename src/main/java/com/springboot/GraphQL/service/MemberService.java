@@ -29,7 +29,8 @@ public class MemberService {
 	    	studentRes.setId(student.getId());
 	    	studentRes.setName(student.getFirstName()+" "+student.getLastName());
 			studentRes.setContact(student.getContact());
-			studentRes.setResult(resultService.getResultForStudent(student.getId()));
+//			to resolve usage on demand , we will create query resolver
+//			studentRes.setResult(resultService.getResultForStudent(student.getId()));
 			responses.add(studentRes);
 	    }
 	    return responses;
