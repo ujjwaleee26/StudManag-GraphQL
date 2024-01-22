@@ -1,5 +1,13 @@
 package com.springboot.GraphQL.response;
 
-public class TeacherSubjectResponse {
+import lombok.Data;
 
+@Data
+public class TeacherSubjectResponse 
+{
+   private int subjectId;
+   
+   private String subjectName;
+   
+   private int experience;
 }

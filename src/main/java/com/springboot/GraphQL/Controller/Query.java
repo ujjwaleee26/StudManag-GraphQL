@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 
 import com.springboot.GraphQL.response.StudentResponse;
 import com.springboot.GraphQL.response.StudentSubjectResponse;
+import com.springboot.GraphQL.response.TeacherResponse;
+import com.springboot.GraphQL.response.TeacherSubjectResponse;
 import com.springboot.GraphQL.service.MemberService;
 import com.springboot.GraphQL.service.ResultService;
+import com.springboot.GraphQL.service.SubjectService;
 
 @Controller
 public class Query 
@@ -23,6 +26,9 @@ public class Query
    
    @Autowired
    private ResultService resultService;
+   
+   @Autowired
+   private SubjectService subjectService;
    
    	
    @QueryMapping	
@@ -67,8 +73,20 @@ public class Query
 		// single database call to fetch entire results for all students
 		return resultService.getResultsForStudents(students);
     }
-
-   	   
+    
+    @QueryMapping
+   	public List<TeacherResponse> getAllTeachers(){
+   		return memberService.getAllTeacher(); 
+   	}
+    
+    @BatchMapping(typeName = "TeacherResponse", field = "subExp")
+    public Map<TeacherResponse, List<TeacherSubjectResponse>> getSubjectForAllTeachers(List<TeacherResponse> teachers){
+    	
+    	System.out.println(":: fetching results for all teachers");
+		// single database call to fetch entire results for all students
+		return subjectService.getSubjectForTeachers(teachers);
+    }
+   
 	   
    }
 

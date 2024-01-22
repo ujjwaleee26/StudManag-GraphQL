@@ -10,6 +10,7 @@ import com.springboot.GraphQL.entity.Member;
 import com.springboot.GraphQL.entity.MemberType;
 import com.springboot.GraphQL.repository.MemberRepository;
 import com.springboot.GraphQL.response.StudentResponse;
+import com.springboot.GraphQL.response.TeacherResponse;
 
 @Service 
 public class MemberService {
@@ -34,6 +35,21 @@ public class MemberService {
 			responses.add(studentRes);
 	    }
 	    return responses;
+	}
+	
+	public List<TeacherResponse> getAllTeacher(){
+		System.out.println(":: in MemberService, fetching all teachers ::");
+		List<Member> teachers=repository.findByType(MemberType.TEACHER.toString());
+		List<TeacherResponse> responses=new ArrayList<TeacherResponse>();
+		for(Member teacher:teachers) {
+			TeacherResponse teacherRes=new TeacherResponse();
+			teacherRes.setId(teacher.getId());
+			teacherRes.setName(teacher.getFirstName()+" "+teacher.getLastName());
+			teacherRes.setContact(teacher.getContact());
+			responses.add(teacherRes);
+		}
+		return responses;
+		
 	}
 
 }

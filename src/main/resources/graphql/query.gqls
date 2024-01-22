@@ -33,6 +33,7 @@ type TeacherResponse{
 }
 
 type TeacherSubjectResponse{
+      subjectId:ID!
       subjectName:String!
       experience:Int! 
 }
