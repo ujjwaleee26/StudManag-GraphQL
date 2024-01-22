@@ -35,7 +35,6 @@ public class ResultService {
 	
 	public Map<StudentResponse, List<StudentSubjectResponse>> getResultsForStudents(List<StudentResponse> responses) {
 		List<Result> results = repository.findAll();
-		
 		Map<StudentResponse, List<StudentSubjectResponse>> batchingMap = new HashMap<>();
 		for (StudentResponse response: responses) {
 			List<StudentSubjectResponse> ssResponse = new ArrayList<StudentSubjectResponse>();

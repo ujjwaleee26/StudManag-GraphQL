@@ -18,9 +18,6 @@ public class MemberService {
 	@Autowired
 	private MemberRepository repository;
 	
-	@Autowired
-	private ResultService resultService;
-	
 	public List<StudentResponse> getAllStudent(){
 		System.out.println(":: in MemberService, fetching all students ::");
 	    List<Member> students=repository.findByType(MemberType.STUDENT.toString());
