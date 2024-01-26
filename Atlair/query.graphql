@@ -1,6 +1,0 @@
-query firstGQL($firstName:String,$lastName:String)
-{
-  firstQuery
-  secondQuery(firstName:$firstName,lastName:$lastName)
-}
-#opimized way-another layer of abstraction

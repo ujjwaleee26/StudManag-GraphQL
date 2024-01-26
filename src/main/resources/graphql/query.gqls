@@ -1,38 +1,41 @@
 type Query{
-     #scaler
-     firstQuery:String
      
-     # gql with argument
-     secondQuery(firstName:String,lastName:String): String
+     # get all members record with filtering option
+     getMembers(filter:MemberType):[MemberResponse]
      
-     # get all student record
-     getAllStudents:[StudentResponse]
-     
-     # get all teacher record
-     getAllTeachers:[TeacherResponse]
         
 }
 
-type StudentResponse{
-      id:ID!
-      name:String!
-      contact:String
-      result:[StudentSubjectResponse]
+enum MemberType{
+       STUDENT
+       TEACHER
 }
 
-type StudentSubjectResponse{
+interface SubjectResponse{
+      subjectId:ID!
+}
+
+type MemberResponse{
+     id:ID!
+     name:String!
+     contact:String
+     type:MemberType
+     propData:[SubjectResponse]
+}
+
+
+
+
+
+type StudentSubjectResponse implements SubjectResponse{
+      subjectId:ID!
       subjectName:String!
       marks:Float
 }
 
-type TeacherResponse{
-      id:ID!
-      name:String!
-      contact:String
-      subExp:[TeacherSubjectResponse]
-}
 
-type TeacherSubjectResponse{
+
+type TeacherSubjectResponse implements SubjectResponse{
       subjectId:ID!
       subjectName:String!
       experience:Int! 

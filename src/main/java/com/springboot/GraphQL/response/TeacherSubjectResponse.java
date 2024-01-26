@@ -1,11 +1,12 @@
 package com.springboot.GraphQL.response;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class TeacherSubjectResponse 
+@Getter
+@Setter
+public class TeacherSubjectResponse extends SubjectResponse 
 {
-   private int subjectId;
    
    private String subjectName;
    
