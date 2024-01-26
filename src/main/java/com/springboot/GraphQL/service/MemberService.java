@@ -64,7 +64,6 @@ public class MemberService {
 			memberRes.setId(member.getId());
 			memberRes.setName(member.getFirstName()+" "+member.getLastName());
 			memberRes.setContact(member.getContact());
-			System.out.println("Actual value of member.getType(): " + member.getType());
 			memberRes.setType(MemberType.valueOf(member.getType().toUpperCase()));
 			responses.add(memberRes);
 		}

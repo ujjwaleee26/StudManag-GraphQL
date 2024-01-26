@@ -1,0 +1,30 @@
+
+{
+  getMembers {
+    id
+    name
+    contact
+    type
+    propData {
+      subjectId
+      ... on TeacherSubjectResponse{
+  subjectName
+  experience
+}
+      ... on StudentSubjectResponse{
+  subjectName
+  marks
+}
+    }
+  }
+}
+
+# fragment teacherData on TeacherSubjectResponse{
+#   subjectName
+#   experience
+# }
+
+# fragment studentData on StudentSubjectResponse{
+#   subjectName
+#   marks
+# }

@@ -32,12 +32,14 @@ public class Query
    
    @QueryMapping
    public List<MemberResponse> getMembers(@Argument("filter")MemberType type){
+	   System.out.println("fetching all members data");
 	   return memberService.getMembers(type);
    }
 	   
    @BatchMapping(typeName="MemberResponse", field="propData")
    public Map<MemberResponse,List<?>> getPropData(List<MemberResponse> members)
    {
+	   System.out.println("fetching member subject data");
 	   List<MemberResponse> students=new ArrayList<MemberResponse>();
 	   List<MemberResponse> teachers=new ArrayList<MemberResponse>();
 	   Map<MemberResponse,List<?>> output=new HashMap<MemberResponse, List<?>>();
@@ -49,8 +51,10 @@ public class Query
 	   });
 	   
 	   if(!students.isEmpty())
+		   System.out.println("fetching all student data");
 		   output.putAll(resultService.getResultsForStudents(students));
 	   if(!teachers.isEmpty())
+		   System.out.println("fetching all teacher data");
 		   output.putAll(subjectService.getSubjectForTeachers(teachers));
 	   return output;
    }
